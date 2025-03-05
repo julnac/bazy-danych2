@@ -1,4 +1,4 @@
-let products = [
+const products = [
     {
         id: 1,
         name: "MacBook Pro 16\"",
@@ -62,3 +62,4 @@ let products = [
 ];
 
 export default products;
+// module.exports = products;

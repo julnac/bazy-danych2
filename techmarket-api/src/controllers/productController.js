@@ -1,4 +1,5 @@
-import products from "../data/products.js"
+// const products = require("../data/products.js")
+import products from "../data/products.js";
 
 export const getAllProducts = (req, res) => {
     res.json(products);
