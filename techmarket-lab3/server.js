@@ -32,4 +32,7 @@ startServer();
 // docker pull postgres:latest
 // docker run --name techmarket-lab3 -e POSTGRES_PASSWORD=haslo123 -p 5433:5432 -d postgres:latest
 
+// node server.js
+//npm test
+
 
