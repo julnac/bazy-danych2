@@ -4,6 +4,7 @@ const userRoutes = require('./userRoutes');
 const categoryRoutes = require('./categoryRoutes');
 const reviewRoutes = require('./reviewRoutes');
 const productRoutes = require('./productRoutes');
+const cartRoutes = require('./cartRoutes');
 
 const router = express.Router();
 
@@ -16,6 +17,7 @@ router.use('/api/users', userRoutes);
 router.use('/api/categories', categoryRoutes);
 router.use('/api/reviews', reviewRoutes);
 router.use('/api/products', productRoutes);
+router.use('/api/carts', cartRoutes);
 
 // Trasa kontroli stanu (health check)
 router.get('/api/health', (req, res) => {

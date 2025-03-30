@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
-    "test": "jest -i",
+    "test": "jest -i techmarket-lab3/__tests__/api/cartController.test.js",
     "start": "node server.js",
     "dev": "nodemon server.js"
   },

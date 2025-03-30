@@ -4,13 +4,14 @@ const sequelize = require('../../config/database');
 const Review = require('../../models/Review');
 const Product = require('../../models/Product');
 const User = require('../../models/User');
-const Category = require('../../models/Category')
+const Category = require('../../models/Category');
 
 let productId, userId, reviewId;
 
 beforeAll(async () => {
   await sequelize.sync({ force: true });
   const category = await Category.create({ name: 'Elektronika', description: 'Urządzenia elektryczne i gadżety' });
+
   const product = await Product.create({ name: 'Test Product', category_id: category.id , description: 'Test description', price: 10.99, stock_count: 100, brand: 'TestBrand', image_url: 'http://example.com/image.jpg' });
   productId = product.id;
 
