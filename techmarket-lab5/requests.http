@@ -1,0 +1,85 @@
+### Zmienne globalne
+@baseUrl = http://localhost:3000/api/products
+@productId = 67ec5384422b5e518faa5069
+
+###
+### 1. Wzorzec atrybutów (Attribute Pattern)
+###
+
+### Utwórz nowy produkt implementujący wzorzec atrybutów
+# Przekształca dowolne atrybuty w ujednoliconą strukturę tablicy obiektów {name, value}
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+  "name": "Smartphone XYZ",
+  "category": "Electronics",
+  "price": 799.99,
+  "attributes": {
+    "color": "black",
+    "storage": "128GB",
+    "camera": "12MP",
+    "battery": "4000mAh"
+  },
+  "category_info": {
+    "id": "5f50a123d1a7d7f78f9b7e6b",
+    "name": "Electronics",
+    "parent": "Technology"
+  }
+}
+
+### Pobierz wszystkie produkty
+GET {{baseUrl}}
+
+### Wyszukaj produkty według atrybutu (Wzorzec atrybutów)
+# Demonstruje elastyczne wyszukiwanie po dowolnych atrybutach
+GET {{baseUrl}}/search?name=color&value=black
+
+###
+### 2. Wzorzec rozszerzonej referencji (Extended Reference Pattern)
+###
+
+### Pobierz produkty z podstawowymi informacjami o kategorii
+# Pokazuje jak unikać JOINów przechowując podstawowe dane powiązanej kolekcji
+GET {{baseUrl}}/with-category
+
+###
+### 3. Wzorzec obliczeniowy (Computed Pattern)
+###
+
+### Dodaj ocenę do produktu (Wzorzec obliczeniowy)
+# Aktualizuje surowe dane oraz pre-obliczoną średnią ocenę
+POST {{baseUrl}}/{{productId}}/rate
+Content-Type: application/json
+
+{
+  "rating": 4
+}
+
+### Pobierz produkty według minimalnej oceny
+# Wykorzystuje pre-obliczone wartości bez potrzeby agregacji w czasie zapytania
+GET {{baseUrl}}/rating/4
+
+###
+### 4. Wzorzec kubełkowy (Bucket Pattern)
+###
+
+### Aktualizuj cenę produktu (Wzorzec kubełkowy)
+# Zapisuje zmianę ceny w miesięcznych "kubełkach" historii
+PUT {{baseUrl}}/{{productId}}/price
+Content-Type: application/json
+
+{
+  "price": 749.99
+}
+
+### Pobierz historię cen produktu
+# Pokazuje miesięczne kubełki z historią cen
+GET {{baseUrl}}/{{productId}}/price-history
+
+###
+### Inne operacje
+###
+
+### Pobierz konkretny produkt po ID
+GET {{baseUrl}}/{{productId}}

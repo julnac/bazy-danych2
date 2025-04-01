@@ -1,0 +1,44 @@
+### Zmienne globalne
+@baseUrl = http://localhost:3000/api/reviews
+@productId = 67ec5384422b5e518faa5069
+@reviewtId = replace_with_actual_review_id_after_creation
+
+### Dodaj nową recenzję
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+  "productId": "{{productId}}",
+  "userId": "user_1",
+  "rating": 5,
+  "title": "Świetny produkt!",
+  "content": "Jestem bardzo zadowolony z zakupu. Produkt spełnia wszystkie oczekiwania.",
+  "pros": ["Dobra jakość", "Wydajny"],
+  "cons": ["Brak"]
+}
+
+### Pobierz wszystkie recenzje
+GET {{baseUrl}}
+
+### Pobierz recenzje dla produktu
+# GET {{baseUrl}}/{{productId}}
+
+### Aktualizuj recenzję
+PUT {{baseUrl}}/{{reviewtId}}/content
+Content-Type: application/json
+
+{
+  "content": "Produkt jest dobry, ale ma kilka wad.",
+}
+
+### Usuń recenzję
+DELETE {{baseUrl}}/{{reviewtId}}
+
+### Oblicz statystyki recenzji
+# GET {{baseUrl}}/{{productId}}/statistics
+
+### Wyszukaj recenzje
+# GET {{baseUrl}}/{{productId}}/search?rating=5&verifiedPurchase=true
+
+### Głosowanie na pomocność recenzji
+# POST {{baseUrl}}/{{reviewtId}}/vote
