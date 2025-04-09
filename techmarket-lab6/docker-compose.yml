@@ -1,0 +1,54 @@
+version: "3.9"
+services:
+  backend:
+    build: .
+    container_name: shopping-app
+    ports:
+      - "5000:5000"
+    depends_on:
+      - postgres
+      - mongo
+    environment:
+      - PORT=5000
+      - MONGODB_URI=mongodb://mongo:27017/shop
+      - POSTGRES_DB=shop
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=haslo123
+      - POSTGRES_HOST=postgres
+    volumes:
+      - .:/app
+    restart: always
+
+  postgres:
+    image: postgres:17
+    container_name: postgres
+    environment:
+      POSTGRES_DB: shop
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: haslo123
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: always
+
+  mongo:
+    image: mongo:6
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    restart: always
+
+volumes:
+  postgres_data:
+  mongo_data:
+
+#uruchomienie
+# docker-compose up --build
+
+#zatrzymanie
+# docker-compose down
+#zatrzymanie z usunięciem danych
+# docker-compose down -v

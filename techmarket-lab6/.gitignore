@@ -1,0 +1,3 @@
+# Plik: .gitignore
+node_modules
+.env
